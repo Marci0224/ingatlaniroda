@@ -20,22 +20,27 @@ function renderData(data) {
   });
 }
 
-
 function showCards(arr){
   document.querySelector(".cards").innerHTML="";
   arr.forEach(item=>{
     console.log(item);
     document.querySelector(".cards").innerHTML+=`
       <div class="card flex flex-col sm:flex-nowrap m-2 max-w-[500px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <img src="${img(item.id)}.png" alt="" class="object-contain w-full rounded-t-lg h-72 md:h-auto md:w-36 grid-cols-1">
-        <div class="flex flex-col justify-between p-4 leading-normal">
-          <p class="font-normal text-gray-700 dark:text-gray-400 top-0 right-0">${item.category}</p>
-          <div class="flex justify-between p-4 leading-normal">
-            <p>Eladó: <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${item.sellerName}</h5></p>
+        <div class="flex justify-end">
+          <span class="font-normal relative text-white border border-white border-2 rounded-full p-[7px] m-[10px]">${item.category}<span>
+        </div>
+        <img src="${urlPhoto+item.imageUrl}" alt="" class="object-contain w-full rounded-t-lg h-72 md:h-auto md:w-36 grid-cols-1">
+        <div class="flex flex-col justify-between p-4 leading-normal items-center">
+          <div class="flex justify-between p-4 items-center">
+            <p>Eladó: <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white ps-2">${item.sellerName}</h5></p>
           </div>
-          <div class="flex justify-between p-4 leading-normal">
-            <p>Területe: <p class="font-normal text-gray-700 dark:text-gray-300">${item.area}$</p>
-            <p class="font-normal text-gray-700 dark:text-gray-400">Szobák száma: ${item.rooms}</p></p>
+          <div class="flex flex-col justify-between leading-normal md:flex-row">
+            <div class="flex items-center p-2">
+              <p>Területe: <p class="font-normal text-gray-700 dark:text-gray-300 p-2">${item.area}$</p></p>
+            </div>
+            <div class="flex items-center p-2">
+              <p>Szobák száma:<p class="font-normal text-gray-700 dark:text-gray-300 p-2"> ${item.rooms}</p></p>
+            </div>
           </div>
           <p>Hirdetés feladásának dátuma: ${item.createAt}</p>
         <div>
@@ -55,15 +60,4 @@ function handleChange(){
   const filteredHouses=houses.filter(obj=>checkedValues.includes(obj.category));
   console.log(filteredHouses);
   showCards(filteredHouses);
-}
-
-function img(a){
-  let kep="";
-  if(a<10){
-    kep+=urlPhoto+"house0";
-  }
-  else{
-    kep+=urlPhoto+"house";
-  }
-  return kep+a;
 }
